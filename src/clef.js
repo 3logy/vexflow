@@ -30,7 +30,38 @@ Vex.Flow.Clef.types = {
     code: "vad",
     point: 40,
     line: 1
+  },
+  "french_violin": {
+    code: "v83",
+    point: 40,
+    line: 4
+  },
+  "soprano": {
+    code: "vad",
+    point: 40,
+    line: 4
+  },
+  "mezzo_soprano": {
+    code: "vad",
+    point: 40,
+    line: 3
+  },
+  "baritone": {
+    code: "vad",
+    point: 40,
+    line: 0
+  },
+  "baritone_bass": {
+    code: "v79",
+    point: 40,
+    line: 2
+  },
+  "sub_bass": {
+    code: "v79",
+    point: 40,
+    line: 0
   }
+
 };
 
 Vex.Flow.Clef.prototype = new Vex.Flow.StaveModifier();
