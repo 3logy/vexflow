@@ -214,6 +214,18 @@ Vex.Flow.Stave.prototype.draw = function(context) {
     var y = this.getYForLine(line);
     this.context.fillRect(x, y, width, 1);
   }
+  
+  //Draw three ledger lines above stave
+  for(var line = -3; line < 0; line++){
+    var y = this.getYForLine(line);
+    this.context.fillRectLedger(x, y, width, 1);
+  }
+
+  //Draw three ledger lines below stave
+  for(var line = num_lines; line < 8; line++){
+    var y = this.getYForLine(line);
+    this.context.fillRectLedger(x, y, width, 1);
+  }
 
   x = this.glyph_start_x;
   var bar_x_shift = 0;
