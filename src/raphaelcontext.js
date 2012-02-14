@@ -36,6 +36,13 @@ Vex.Flow.RaphaelContext.prototype.init = function(element) {
     "stroke": "white",
     "font": "10pt Arial"
   };
+  
+  this.ledger_attributes ={
+    "stroke-dasharray": "- ",
+    "fill": "#f54",
+    "stroke-width": 0.1,
+    "stroke": "#656"
+  };
 
   this.state_stack= [];
 }
@@ -107,6 +114,18 @@ Vex.Flow.RaphaelContext.prototype.fillRect = function(x, y, width, height) {
 
   var r = this.paper.rect(x, y, width - 0.5, height - 0.5).
     attr(this.attributes);
+  return this;
+}
+
+Vex.Flow.RaphaelContext.prototype.fillRectLedger = function(x, y, width, height) {
+  if (height < 0) {
+    y += height;
+    height = -height
+  }
+
+  var r = this.paper.rect(x, y, width - 0.5, height - 0.5).
+    attr(this.ledger_attributes);
+
   return this;
 }
 
