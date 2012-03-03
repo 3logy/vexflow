@@ -218,18 +218,6 @@ Vex.Flow.Stave.prototype.draw = function(context) {
     var y = this.getYForLine(line);
     this.context.fillRect(x, y, width, 1);
   }
-  
-  //Draw three ledger lines above stave
-  for(var line = -3; line < 0; line++){
-    var y = this.getYForLine(line);
-    this.context.fillRectLedger(x, y, width, 1);
-  }
-
-  //Draw three ledger lines below stave
-  for(var line = num_lines; line < 8; line++){
-    var y = this.getYForLine(line);
-    this.context.fillRectLedger(x, y, width, 1);
-  }
 
   x = this.glyph_start_x;
   var bar_x_shift = 0;
@@ -257,6 +245,78 @@ Vex.Flow.Stave.prototype.draw = function(context) {
 
   return this;
 }
+
+//Add Ledger Line to Stave
+Vex.Flow.Stave.prototype.addLedgerLine = function(){
+ if (!this.context) throw new Vex.RERR("NoCanvasContext",
+    "Can't draw stave without canvas context.");
+  
+  var num_lines = this.options.num_lines;
+  var width = this.width;
+  var x = this.x;
+  var ctx = this.context;
+  
+  if(ctx.canvas != null){
+  
+	var initX = ctx.canvas.clientLeft;
+	var tempX = 40;
+	var tempY = 40 + (num_lines * 10) + 10;
+	var initY = ctx.canvas.clientTop;
+	var initH = ctx.canvas.height;
+	var initW = ctx.canvas.width;
+	ctx.stroke(0.1);
+	ctx.strokeStyle = "#f54";
+	ctx.beginPath();
+	
+	//Draw three ledger lines above stave
+	for(var line = -3; line < 0; line++){
+		ctx.moveTo(initX, tempX);
+		ctx.lineTo(initW, tempX);
+		tempX = tempX - 10;
+	}
+	
+	//Draw three ledger lines below stave
+	for(var line = num_lines; line < 8; line++){
+		console.log(initX + " / " + tempY);		
+		ctx.moveTo(initX, tempY);
+		ctx.lineTo(initW, tempY);
+		tempY = tempY + 10;
+	}
+	ctx.stroke();
+	console.log(this.context);
+  }
+  
+  if(this.context.paper != null){
+	  
+	  var X = this.context.element.firstElementChild
+	  .childNodes[2].attributes[1].value;
+	  var top = this.context.element.firstElementChild
+	  .childNodes[2].attributes[2].value;
+	  var topY = parseFloat(top) - 15;
+	  var bottom = this.context.element.firstElementChild
+	  .childNodes[2 + num_lines -1].attributes[2].value;
+	  var W = this.context.element.firstElementChild
+	  .childNodes[2].attributes[3].value;
+	  var H = this.context.element.firstElementChild
+		.childNodes[2].attributes[4].value;
+	  var bottomY = parseFloat(bottom) + 15;
+	  console.log(this.context);
+	  console.log( X + " " + top + " " + bottom + " " + H + " " + W);
+	
+	//Draw three ledger lines above stave
+	for(var line = -3; line < 0; line++){		
+		this.context.fillRectLedger(X, topY, W, H);
+		topY = topY - 15;
+	}
+	
+	//Draw three ledger lines below stave
+	for(var line = num_lines; line < 8; line++){		
+		this.context.fillRectLedger(X, bottomY, W, H);
+		bottomY = bottomY + 15;
+	}
+  }
+}
+
 
 // Draw Simple barlines for backward compatability
 // Do not delete - draws the beginning bar of the stave
