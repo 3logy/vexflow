@@ -61,6 +61,9 @@ Vex.Flow.Renderer.bolsterCanvasContext = function(ctx) {
     this.strokeStyle = style;
     return this;
   }
+  ctx.fillRectLedger = function(){
+  	return this;  
+  }
   return ctx;
 }
 
