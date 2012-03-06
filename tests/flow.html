@@ -77,6 +77,7 @@
   <script src="../src/note.js"></script>
   <script src="../src/bend.js"></script>
   <script src="../src/stavenote.js"></script>
+  <script src="../src/gracenotegroup.js"></script>
   <script src="../src/tabnote.js"></script>
   <script src="../src/barnote.js"></script>
   <script src="../src/ghostnote.js"></script>
@@ -86,6 +87,7 @@
   <script src="../src/tabslide.js"></script>
   <script src="../src/beam.js"></script>
   <script src="../src/vibrato.js"></script>
+  <script src="../src/trill.js"></script>
   <script src="../src/annotation.js"></script>
   <script src="../src/tuning.js"></script>
   <script src="../src/stavemodifier.js"></script>
@@ -99,11 +101,13 @@
   <script src="../src/stavevolta.js"></script>
   <script src="../src/staverepetition.js"></script>
   <script src="../src/stavesection.js"></script>
+  <script src="../src/stavehairpin.js"></script>
   <script src="../src/articulation.js"></script>
   <script src="../src/raphaelcontext.js"></script>
+  <script src="../src/tuplet.js"></script>
 
   <!-- Compiled Source -->
-  <script src="../vexflow.js"></script>
+  <script src="../build/vexflow/vexflow-free.js"></script>
 
   <!-- VexTab Source -->
   <script src="../vextab/vextab.js"></script>
@@ -128,6 +132,7 @@
   <script src="bend_tests.js"></script>
   <script src="formatter_tests.js"></script>
   <script src="stavetie_tests.js"></script>
+  <script src="stavehairpin_tests.js"></script>
   <script src="tabtie_tests.js"></script>
   <script src="tabslide_tests.js"></script>
   <script src="beam_tests.js"></script>
@@ -139,11 +144,15 @@
   <script src="clef_tests.js"></script>
   <script src="music_tests.js"></script>
   <script src="keymanager_tests.js"></script>
+  <script src="key_clef_tests.js"></script>
   <script src="articulation_tests.js"></script>
   <script src="staveconnector_tests.js"></script>
+  <script src="tuplet_tests.js"></script>
   <script src="percussion_tests.js"></script>
-  <script src="key_clef_tests.js"></script>
   <script src="ledgerline_tests.js"></script>
+  <script src="trills_tests.js"></script>
+  <script src="gracenote_tests.js"></script>
+  
   <script src="../vextab/vextab_tests.js"></script>
 
   <script>
@@ -163,6 +172,7 @@
       Vex.Flow.Test.KeySignature.Start();
       Vex.Flow.Test.TimeSignature.Start();
       Vex.Flow.Test.StaveTie.Start();
+      Vex.Flow.Test.StaveHairpin.Start();
       Vex.Flow.Test.TabTie.Start();
       Vex.Flow.Test.TabSlide.Start();
       Vex.Flow.Test.Beam.Start();
@@ -172,11 +182,14 @@
       Vex.Flow.Test.Tuning.Start();
       Vex.Flow.Test.Music.Start();
       Vex.Flow.Test.KeyManager.Start();
+      Vex.Flow.Test.ClefKeySignature.Start();
       Vex.Flow.Test.Articulation.Start();
       Vex.Flow.Test.StaveConnector.Start();
+      Vex.Flow.Test.Tuplet.Start();
       Vex.Flow.Test.Percussion.Start();
-      Vex.Flow.Test.ClefKeySignature.Start();
       Vex.Flow.Test.LedgerLine.Start();
+      Vex.Flow.Test.Trill.Start();
+      Vex.Flow.Test.GraceNote.Start();
     });
   </script>
 </head>
