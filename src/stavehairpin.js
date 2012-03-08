@@ -53,6 +53,7 @@ Vex.Flow.StaveHairpin.prototype.setContext = function(context) {
   return this; }
   
 Vex.Flow.StaveHairpin.prototype.setPosition = function(position) {
+
   if (position == Vex.Flow.Modifier.Position.ABOVE ||
       position == Vex.Flow.Modifier.Position.BELOW)
     this.position = position;

@@ -501,6 +501,7 @@ Vex.Flow.trillCodes.trills = {
 	'tr': 'v1f', //tr
 	'turn': 'v2c', //w,
 	'mordent': 'v1e', //w
+	'gruppetto': 'v72',
 	'mordentTurn': 'v45', //v|v
 	'lowerPrefix': 'v60', //,w
 	'lowerPrefixTurn': 'v29',

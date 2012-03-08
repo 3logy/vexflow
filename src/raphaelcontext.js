@@ -122,8 +122,8 @@ Vex.Flow.RaphaelContext.prototype.fillRectLedger = function(x, y, width, height)
     y += height;
     height = -height
   }
-
-  var r = this.paper.rect(x, y, width - 0.5, height - 0.5).
+           
+  var r = this.paper.rect(x, y, width - 0.5, parseFloat(height + 1.5)).
     attr(this.ledger_attributes);
 
   return this;

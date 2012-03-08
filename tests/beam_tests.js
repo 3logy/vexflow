@@ -8,15 +8,35 @@ Vex.Flow.Test.Beam = {}
 Vex.Flow.Test.Beam.Start = function() {
   module("Beam");
   Vex.Flow.Test.runTest("Simple Beam", Vex.Flow.Test.Beam.simple);
+  Vex.Flow.Test.runRaphaelTest("Simple Beam (Raphael)", 
+		Vex.Flow.Test.Beam.simple);
   Vex.Flow.Test.runTest("Multi Beam", Vex.Flow.Test.Beam.multi);
+  Vex.Flow.Test.runRaphaelTest("Multi Beam (Raphael)", 
+		Vex.Flow.Test.Beam.multi);
   Vex.Flow.Test.runTest("Sixteenth Beam", Vex.Flow.Test.Beam.sixteenth);
+  Vex.Flow.Test.runRaphaelTest("Sixteenth Beam (Raphael)", 
+		Vex.Flow.Test.Beam.sixteenth);
   Vex.Flow.Test.runTest("Slopey Beam", Vex.Flow.Test.Beam.slopey);
+  Vex.Flow.Test.runRaphaelTest("Slopey Beam (Raphael)", 
+		Vex.Flow.Test.Beam.slopey);
   Vex.Flow.Test.runTest("Mixed Beam", Vex.Flow.Test.Beam.mixed);
+  Vex.Flow.Test.runRaphaelTest("Mixed Beam (Raphael)", 
+		Vex.Flow.Test.Beam.mixed);
   Vex.Flow.Test.runTest("Dotted Beam", Vex.Flow.Test.Beam.dotted);
+  Vex.Flow.Test.runRaphaelTest("Dotted Beam (Raphael)", 
+		Vex.Flow.Test.Beam.dotted);
   Vex.Flow.Test.runTest("Close Trade-offs Beam", Vex.Flow.Test.Beam.tradeoffs);
+  Vex.Flow.Test.runRaphaelTest("Close Trade-offs Beam (Raphael)", 
+		Vex.Flow.Test.Beam.tradeoffs);
   Vex.Flow.Test.runTest("Insane Beam", Vex.Flow.Test.Beam.insane);
+  Vex.Flow.Test.runRaphaelTest("Insane Beam (Raphael)", 
+		Vex.Flow.Test.Beam.insane);
   Vex.Flow.Test.runTest("Lengthy Beam", Vex.Flow.Test.Beam.lenghty);
+  Vex.Flow.Test.runRaphaelTest("Lengthy Beam (Raphael)", 
+		Vex.Flow.Test.Beam.lenghty);
   Vex.Flow.Test.runTest("Outlier Beam", Vex.Flow.Test.Beam.outlier);
+  Vex.Flow.Test.runRaphaelTest("Outlier Beam (Raphael)", 
+		Vex.Flow.Test.Beam.outlier);
 }
 
 Vex.Flow.Test.Beam.beamNotes = function(notes, stave, ctx) {
@@ -31,20 +51,19 @@ Vex.Flow.Test.Beam.beamNotes = function(notes, stave, ctx) {
   beam.setContext(ctx).draw();
 }
 
-Vex.Flow.Test.Beam.setupContext = function(options, x, y) {
-  Vex.Flow.Test.resizeCanvas(options.canvas_sel, x || 450, y || 140);
-  var ctx = Vex.getCanvasContext(options.canvas_sel);
+Vex.Flow.Test.Beam.setupContext = function(options, contextBuilder) {
+  var ctx = new contextBuilder(options.canvas_sel, 450, 140);
   ctx.scale(0.9, 0.9); ctx.fillStyle = "#221"; ctx.strokeStyle = "#221";
   ctx.font = " 10pt Arial";
-  var stave = new Vex.Flow.Stave(10, 10, x || 450).addTrebleGlyph().
+  var stave = new Vex.Flow.Stave(10, 10, 450).addTrebleGlyph().
     setContext(ctx).draw();
 
   return {context: ctx, stave: stave};
 }
 
 
-Vex.Flow.Test.Beam.simple = function(options) {
-  var c = Vex.Flow.Test.Beam.setupContext(options);
+Vex.Flow.Test.Beam.simple = function(options, contextBuilder) {
+  var c = Vex.Flow.Test.Beam.setupContext(options, contextBuilder);
   function newNote(note_struct) { return new Vex.Flow.StaveNote(note_struct); }
   function newAcc(type) { return new Vex.Flow.Accidental(type); }
 
@@ -64,8 +83,8 @@ Vex.Flow.Test.Beam.simple = function(options) {
   ok(true, "Simple Test");
 }
 
-Vex.Flow.Test.Beam.multi = function(options) {
-  var c = Vex.Flow.Test.Beam.setupContext(options);
+Vex.Flow.Test.Beam.multi = function(options, contextBuilder) {
+  var c = Vex.Flow.Test.Beam.setupContext(options, contextBuilder);
   function newNote(note_struct) { return new Vex.Flow.StaveNote(note_struct); }
   function newAcc(type) { return new Vex.Flow.Accidental(type); }
 
@@ -114,8 +133,8 @@ Vex.Flow.Test.Beam.multi = function(options) {
   ok(true, "Multi Test");
 }
 
-Vex.Flow.Test.Beam.sixteenth = function(options) {
-  var c = Vex.Flow.Test.Beam.setupContext(options);
+Vex.Flow.Test.Beam.sixteenth = function(options, contextBuilder) {
+  var c = Vex.Flow.Test.Beam.setupContext(options, contextBuilder);
   function newNote(note_struct) { return new Vex.Flow.StaveNote(note_struct); }
   function newAcc(type) { return new Vex.Flow.Accidental(type); }
 
@@ -166,9 +185,8 @@ Vex.Flow.Test.Beam.sixteenth = function(options) {
   ok(true, "Sixteenth Test");
 }
 
-Vex.Flow.Test.Beam.slopey = function(options) {
-  Vex.Flow.Test.resizeCanvas(options.canvas_sel, 350, 140);
-  var ctx = Vex.getCanvasContext(options.canvas_sel);
+Vex.Flow.Test.Beam.slopey = function(options, contextBuilder) {
+  var ctx = new contextBuilder(options.canvas_sel, 350, 140);
   ctx.scale(0.9, 0.9); ctx.fillStyle = "#221"; ctx.strokeStyle = "#221";
   ctx.font = " 10pt Arial";
   var stave = new Vex.Flow.Stave(10, 30, 350).addTrebleGlyph().
@@ -203,8 +221,8 @@ Vex.Flow.Test.Beam.slopey = function(options) {
   ok(true, "Slopey Test");
 }
 
-Vex.Flow.Test.Beam.mixed = function(options) {
-  var c = Vex.Flow.Test.Beam.setupContext(options);
+Vex.Flow.Test.Beam.mixed = function(options, contextBuilder) {
+  var c = Vex.Flow.Test.Beam.setupContext(options, contextBuilder);
   function newNote(note_struct) { return new Vex.Flow.StaveNote(note_struct); }
   function newAcc(type) { return new Vex.Flow.Accidental(type); }
 
@@ -265,8 +283,8 @@ Vex.Flow.Test.Beam.mixed = function(options) {
   ok(true, "Multi Test");
 }
 
-Vex.Flow.Test.Beam.dotted = function(options) {
-  var c = Vex.Flow.Test.Beam.setupContext(options);
+Vex.Flow.Test.Beam.dotted = function(options, contextBuilder) {
+  var c = Vex.Flow.Test.Beam.setupContext(options, contextBuilder);
   function newNote(note_struct) { return new Vex.Flow.StaveNote(note_struct); }
   function newAcc(type) { return new Vex.Flow.Accidental(type); }
 
@@ -308,8 +326,8 @@ Vex.Flow.Test.Beam.dotted = function(options) {
   ok(true, "Dotted Test");
 }
 
-Vex.Flow.Test.Beam.tradeoffs = function(options) {
-  var c = Vex.Flow.Test.Beam.setupContext(options);
+Vex.Flow.Test.Beam.tradeoffs = function(options, contextBuilder) {
+  var c = Vex.Flow.Test.Beam.setupContext(options, contextBuilder);
   function newNote(note_struct) { return new Vex.Flow.StaveNote(note_struct); }
   function newAcc(type) { return new Vex.Flow.Accidental(type); }
 
@@ -339,8 +357,8 @@ Vex.Flow.Test.Beam.tradeoffs = function(options) {
   ok(true, "Close Trade-offs Test");
 }
 
-Vex.Flow.Test.Beam.insane = function(options) {
-  var c = Vex.Flow.Test.Beam.setupContext(options);
+Vex.Flow.Test.Beam.insane = function(options, contextBuilder) {
+  var c = Vex.Flow.Test.Beam.setupContext(options, contextBuilder);
   function newNote(note_struct) { return new Vex.Flow.StaveNote(note_struct); }
   function newAcc(type) { return new Vex.Flow.Accidental(type); }
 
@@ -370,8 +388,8 @@ Vex.Flow.Test.Beam.insane = function(options) {
   ok(true, "Insane Test");
 }
 
-Vex.Flow.Test.Beam.lenghty = function(options) {
-  var c = Vex.Flow.Test.Beam.setupContext(options);
+Vex.Flow.Test.Beam.lenghty = function(options, contextBuilder) {
+  var c = Vex.Flow.Test.Beam.setupContext(options, contextBuilder);
   function newNote(note_struct) { return new Vex.Flow.StaveNote(note_struct); }
   function newAcc(type) { return new Vex.Flow.Accidental(type); }
 
@@ -395,8 +413,8 @@ Vex.Flow.Test.Beam.lenghty = function(options) {
   ok(true, "Lengthy Test");
 }
 
-Vex.Flow.Test.Beam.outlier = function(options) {
-  var c = Vex.Flow.Test.Beam.setupContext(options);
+Vex.Flow.Test.Beam.outlier = function(options, contextBuilder) {
+  var c = Vex.Flow.Test.Beam.setupContext(options, contextBuilder);
   function newNote(note_struct) { return new Vex.Flow.StaveNote(note_struct); }
   function newAcc(type) { return new Vex.Flow.Accidental(type); }
 

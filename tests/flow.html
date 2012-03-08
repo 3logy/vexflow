@@ -87,7 +87,7 @@
   <script src="../src/tabslide.js"></script>
   <script src="../src/beam.js"></script>
   <script src="../src/vibrato.js"></script>
-  <script src="../src/trill.js"></script>
+  <script src="../src/trill.js"></script><!--added-->
   <script src="../src/annotation.js"></script>
   <script src="../src/tuning.js"></script>
   <script src="../src/stavemodifier.js"></script>
@@ -101,10 +101,10 @@
   <script src="../src/stavevolta.js"></script>
   <script src="../src/staverepetition.js"></script>
   <script src="../src/stavesection.js"></script>
-  <script src="../src/stavehairpin.js"></script>
   <script src="../src/articulation.js"></script>
-  <script src="../src/raphaelcontext.js"></script>
-  <script src="../src/tuplet.js"></script>
+  <script src="../src/raphaelcontext.js"></script> 
+  <script src="../src/stavehairpin.js"></script><!--added-->
+  <script src="../src/tuplet.js"></script><!--added-->
 
   <!-- Compiled Source -->
   <script src="../build/vexflow/vexflow-free.js"></script>
@@ -132,7 +132,6 @@
   <script src="bend_tests.js"></script>
   <script src="formatter_tests.js"></script>
   <script src="stavetie_tests.js"></script>
-  <script src="stavehairpin_tests.js"></script>
   <script src="tabtie_tests.js"></script>
   <script src="tabslide_tests.js"></script>
   <script src="beam_tests.js"></script>
@@ -150,6 +149,7 @@
   <script src="tuplet_tests.js"></script>
   <script src="percussion_tests.js"></script>
   <script src="ledgerline_tests.js"></script>
+  <script src="stavehairpin_tests.js"></script> 
   <script src="trills_tests.js"></script>
   <script src="gracenote_tests.js"></script>
   
@@ -172,7 +172,6 @@
       Vex.Flow.Test.KeySignature.Start();
       Vex.Flow.Test.TimeSignature.Start();
       Vex.Flow.Test.StaveTie.Start();
-      Vex.Flow.Test.StaveHairpin.Start();
       Vex.Flow.Test.TabTie.Start();
       Vex.Flow.Test.TabSlide.Start();
       Vex.Flow.Test.Beam.Start();
@@ -185,11 +184,12 @@
       Vex.Flow.Test.ClefKeySignature.Start();
       Vex.Flow.Test.Articulation.Start();
       Vex.Flow.Test.StaveConnector.Start();
-      Vex.Flow.Test.Tuplet.Start();
       Vex.Flow.Test.Percussion.Start();
       Vex.Flow.Test.LedgerLine.Start();
+      Vex.Flow.Test.StaveHairpin.Start();
       Vex.Flow.Test.Trill.Start();
       Vex.Flow.Test.GraceNote.Start();
+      Vex.Flow.Test.Tuplet.Start();
     });
   </script>
 </head>
