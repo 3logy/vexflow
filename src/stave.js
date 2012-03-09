@@ -196,6 +196,11 @@ Vex.Flow.Stave.prototype.addTimeSignature = function(timeSpec) {
   return this;
 }
 
+Vex.Flow.Stave.prototype.addTempo = function(note, tempoSpec) {
+  this.addModifier(new Vex.Flow.Tempo(note, tempoSpec));
+  return this;
+}
+
 Vex.Flow.Stave.prototype.addTrebleGlyph = function() {
   this.clef = "treble";
   this.addGlyph(new Vex.Flow.Glyph("v83", 40));
@@ -284,29 +289,52 @@ Vex.Flow.Stave.prototype.addLedgerLine = function(){
   }
   
   if(this.context.paper != null){
-	  var X = this.context.element.firstElementChild
-	  .childNodes[2].attributes[1].value;
-	  var top = this.context.element.firstElementChild
-	  .childNodes[2].attributes[2].value;
-	  var topY = parseFloat(top) - 10;
-	  var bottom = this.context.element.firstElementChild
-	  .childNodes[2 + num_lines -1].attributes[2].value;
-	  var W = this.context.element.firstElementChild
-	  .childNodes[2].attributes[3].value;
-	  var H = this.context.element.firstElementChild
-		.childNodes[2].attributes[4].value;
-	  var bottomY = parseFloat(bottom) + 10;
-	 
+	  
+	var X , top, bottom, topY, bottomY, W, H, dist;
+	var attr = new Array();
+	attr = this.context.element.firstElementChild.childNodes[2].attributes;
+	attr2 = this.context.element.firstElementChild.childNodes[2 + num_lines -1].attributes;
+	var temp1 = this.context.element.firstElementChild.childNodes[3].attributes.y.value;
+	var temp2 = this.context.element.firstElementChild.childNodes[2].attributes.y.value;
+	dist = parseFloat(temp1 - temp2);
+	
+	for(var x = 0; x < attr.length; x++)
+	{   if(attr[x].nodeName == "x")
+		{
+			X = attr[x].value;  
+		}
+			
+		if(attr[x].nodeName == "y")
+		{
+			top = attr[x].value;
+			topY = parseFloat(top) - dist;
+		}
+		
+		if(attr[x].nodeName == "width")
+			W = attr[x].value;
+			
+		if(attr[x].nodeName == "height")
+			H = attr[x].value;
+	}
+	
+	for(var x = 0; x < attr2.length; x++)
+	{
+		if(attr2[x].nodeName == "y")
+		{
+			bottom = attr2[x].value;
+			bottomY = parseFloat(bottom) + dist;
+		} 
+	}
 	//Draw three ledger lines above stave
-	for(var line = -3; line < 0; line++){		
-		this.context.fillRectLedger(X, topY, W, H);
-		topY = topY - 10;
+	for(var line = -3; line < 0; line++){
+		this.context.fillRectLedger(X, topY, W, 2);
+		topY = topY - dist;
 	}
 	
 	//Draw three ledger lines below stave
 	for(var line = num_lines; line < 8; line++){		
-		this.context.fillRectLedger(X, bottomY, W, H);
-		bottomY = bottomY + 10;
+		this.context.fillRectLedger(X, bottomY, W, 2);
+		bottomY = bottomY + dist;
 	}
   }
 }
